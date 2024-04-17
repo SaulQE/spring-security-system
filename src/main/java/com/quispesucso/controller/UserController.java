@@ -1,9 +1,9 @@
 package com.quispesucso.controller;
 
 import com.quispesucso.entity.UserEntity;
+import com.quispesucso.service.CaptchaService;
 import com.quispesucso.service.RoleService;
 import com.quispesucso.service.UserService;
-import com.quispesucso.util.CaptchaGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @Controller
@@ -25,6 +24,9 @@ public class UserController
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CaptchaService captchaService;
 
     public UserController(){
     }
@@ -71,23 +73,20 @@ public class UserController
     }
 
     @GetMapping("/register")
-    public String register_GET(Model model, HttpSession session) {
+    public String register_GET(Model model) {
         model.addAttribute("newUserEntity", new UserEntity());
-        String captcha = new CaptchaGenerator().generateCaptcha();
-        session.setAttribute("captcha", captcha);
-        model.addAttribute("captcha", captcha);
         return "User/register";
     }
 
     @PostMapping("/register")
-    public String register_POST(UserEntity newUser, @RequestParam("captcha") String userInput, HttpSession session) {
-        String captcha = (String) session.getAttribute("captcha");
-        if (captcha.equals(userInput)) {
-            userService.insert(newUser);
-            return "redirect:/login";
-        } else {
+    public String register_POST(UserEntity newUser,
+                                @RequestParam("g-recaptcha-response") String recaptchaResponse, HttpServletRequest request) {
+        String ip = request.getRemoteAddr();
+        if (!captchaService.isResponseValid(ip, recaptchaResponse)) {
             return "redirect:/register";
         }
+        userService.insert(newUser);
+        return "redirect:/login";
     }
 
 

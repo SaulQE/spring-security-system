@@ -29,14 +29,14 @@
         Email: <form:input type="text" path="email" required="required"/> <br>
         Celular: <form:input type="text" path="celular" required="required"/> <br>
 
-        Captcha: <p>${captcha}</p>
-        Ingrese el captcha: <input type="text" name="captcha" required="required"/> <br><br>
+        <div class="g-recaptcha" data-sitekey="6LfFrr4pAAAAAMPvUgyYpFyxWP6_ogJ74ramPDoO"></div>
 
         <button type="submit">Guardar</button> |
         <button type="button" onclick="location.href='/saul/login'">Cancelar</button>
 
     </form:form>
 
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </div>
 </body>
 </html>
