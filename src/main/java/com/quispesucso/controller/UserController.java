@@ -31,17 +31,17 @@ public class UserController
 
     @GetMapping("/user")
     public String user_GET() {
-        return "user";
+        return "User/user";
     }
 
     @GetMapping("/admin")
     public String admin_GET() {
-        return "admin";
+        return "User/admin";
     }
 
     @GetMapping("/dba")
     public String dba_GET() {
-        return "dba";
+        return "User/dba";
     }
 
     @GetMapping("/admin/registration")
@@ -50,7 +50,7 @@ public class UserController
         model.addAttribute("userEntity", new UserEntity());
         map.put("itemsRole", roleService.findAll());
 
-        return "registration";
+        return "User/registration";
     }
 
     @PostMapping("/admin/registration")
@@ -62,12 +62,12 @@ public class UserController
 
     @GetMapping("/access_denied")
     public String access_denied_GET() {
-        return "access_denied";
+        return "User/access_denied";
     }
 
     @GetMapping("/login")
     public String login_GET() {
-        return "login";
+        return "User/login";
     }
 
     @GetMapping("/register")
@@ -76,7 +76,7 @@ public class UserController
         String captcha = new CaptchaGenerator().generateCaptcha();
         session.setAttribute("captcha", captcha);
         model.addAttribute("captcha", captcha);
-        return "register";
+        return "User/register";
     }
 
     @PostMapping("/register")
