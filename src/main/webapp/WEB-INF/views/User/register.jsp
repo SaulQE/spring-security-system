@@ -9,6 +9,7 @@
 <head>
     <meta charset="ISO-8859-1">
     <title>Register</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
 <div align="center">
@@ -36,7 +37,6 @@
 
     </form:form>
 
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </div>
 </body>
 </html>
