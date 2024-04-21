@@ -24,7 +24,7 @@
                     <!-- Background image for card set in CSS! -->
                 </div>
                 <div class="card-body p-4 p-sm-5">
-                    <h5 class="card-title text-center mb-5 fw-light fs-5">Register</h5>
+                    <h2 class="card-title text-center mb-5 fw-light fs-5">REGISTER</h2>
 
                     <form:form action="" method="post" modelAttribute="newUserEntity">
 

@@ -8,97 +8,73 @@
 <head>
     <meta charset="ISO-8859-1">
     <title>Login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
-    <link rel="stylesheet" href="css/loginStyle.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
 
-<div class="section">
-    <div class="container">
-        <div class="row full-height justify-content-center">
-            <div class="col-12 text-center align-self-center py-5">
-                <div class="section pb-5 pt-5 pt-sm-2 text-center">
-                    <h6 class="mb-0 pb-3"><span>LOGIN</span><span>REGISTRARSE</span></h6>
-                    <input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
-                    <label for="reg-log"></label>
-                    <div class="card-3d-wrap mx-auto">
-                        <div class="card-3d-wrapper">
-                            <div class="card-front">
-                                <div class="center-wrap">
-                                    <div class="section text-center">
-                                        <!-- Formulario -->
-                                        <form action="/saul/login" method="post">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
+                <div class="card-img-left d-none d-md-flex">
+                    <!-- Background image for card set in CSS! -->
+                </div>
+                <div class="card-body p-4 p-sm-5">
+                    <h2 class="card-title text-center mb-5 fw-light fs-5">Login</h2>
 
-                                            <!-- Protección para que se entienda como login -->
-                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <!-- Si hay error en las credenciales -->
+                    <c:if test="${param.error != null}">
+                        <p style="color:red">Error acceso denegado</p>
+                    </c:if>
 
-                                            <h4 class="mb-4">Login</h4>
-                                            
-                                            <img src="images/user.png" width="90px">
-                                            
-                                            <!-- Si hay error en las credenciales -->
-                                            <c:if test="${param.error != null}">
-                                                <p style="color:red">Error acceso denegado</p>
-                                            </c:if>
+                    <!-- Si ha cerrado sesión -->
+                    <c:if test="${param.logout != null}">
+                        <p style="color:green;">Has sido desconectado</p>
+                    </c:if>
 
-                                            <!-- Si ha cerrado sesión -->
-                                            <c:if test="${param.logout != null}">
-                                                <p style="color:green;">Has sido desconectado</p>
-                                            </c:if>
+                    <form action="/saul/login" method="post">
 
-                                            <div class="form-group">
-                                                <input type="text" name="txtUsername" class="form-style"
-                                                       placeholder="Username" id="logemail" autocomplete="off"/>
-                                                <i class="input-icon uil uil-at"></i>
-                                            </div>
-                                            <div class="form-group mt-2">
-                                                <input type="password" name="txtPassword" class="form-style"
-                                                       placeholder="Password" id="logpass" autocomplete="off"/>
-                                                <i class="input-icon uil uil-lock-alt"></i>
-                                            </div>
-                                            <button type="submit" class="btn mt-4">Iniciar sesión</button>
-                                            <br>
-                                            <a class="btn mt-4" href="/saul/index">Index</a>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="card-back">
-                                <div class="center-wrap">
-                                    <div class="section text-center">
-                                        <h4 class="mb-4 pb-3">Registrarse</h4>
-                                        <div class="form-group">
-                                            <input type="text" name="txtPassword" class="form-style"
-                                                   placeholder="Tú nombre completo" id="logname" autocomplete="off">
-                                            <i class="input-icon uil uil-user"></i>
-                                        </div>
-                                        <div class="form-group mt-2">
-                                            <input type="email" name="logemail" class="form-style"
-                                                   placeholder="email" id="logemail" autocomplete="off">
-                                            <i class="input-icon uil uil-at"></i>
-                                        </div>
-                                        <div class="form-group mt-2">
-                                            <input type="password" name="logpass" class="form-style"
-                                                   placeholder="password" id="logpass" autocomplete="off">
-                                            <i class="input-icon uil uil-lock-alt"></i>
-                                        </div>
-                                        <a href="#" class="btn mt-4">Registrarse</a>
-                                    </div>
-                                </div>
-                            </div>
+                        <!-- Protección para que se entienda como login -->
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingInputUsername"
+                                        placeholder="Username"
+                                        required="required"
+                                        name="txtUsername"
+                                        autocomplete="off"/>
+                            <label>Username</label>
                         </div>
-                    </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="floatingInputUsername"
+                                        placeholder="Password"
+                                        required="required"
+                                        name="txtPassword"/>
+                            <label>Password</label>
+                        </div>
+
+                        <div type="submit" class="d-grid mb-2">
+                            <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit">
+                                Iniciar sesion
+                            </button>
+                        </div>
+
+                        <a class="d-block text-center mt-2 small" href="/saul/register">no tienes cuenta? Registrate</a>
+
+
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    
-    
-    
 </div>
 
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 </body>
 </html>
