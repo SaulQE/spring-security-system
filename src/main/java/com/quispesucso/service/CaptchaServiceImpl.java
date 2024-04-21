@@ -23,8 +23,12 @@ public class CaptchaServiceImpl implements CaptchaService
         requestMap.add("secret", recaptchaSecret);
         requestMap.add("response", response);
         requestMap.add("remoteip", clientIp);
+
+        // Realizar una solicitud POST al servicio de verificación de reCAPTCHA
         RecaptchaResponse recaptchaResponse = restTemplate.postForObject(
                 GOOGLE_VERIFY_URL, requestMap, RecaptchaResponse.class);
+
+        // Devolver el resultado de la verificación
         return recaptchaResponse.isSuccess();
     }
 }

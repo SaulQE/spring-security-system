@@ -81,7 +81,10 @@ public class UserController
     @PostMapping("/register")
     public String register_POST(UserEntity newUser,
                                 @RequestParam("g-recaptcha-response") String recaptchaResponse, HttpServletRequest request) {
+
+        // Obtiene la dirección IP del cliente
         String ip = request.getRemoteAddr();
+        // Verifica la respuesta reCAPTCHA
         if (!captchaService.isResponseValid(ip, recaptchaResponse)) {
             return "redirect:/register";
         }
