@@ -12,4 +12,10 @@ public class HomeController
     public String index_GET() {
         return "index";
     }
+
+    @GetMapping({"/home"})
+    public String home_GET() {
+        return "home";
+    }
+
 }
