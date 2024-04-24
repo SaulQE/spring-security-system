@@ -15,6 +15,26 @@ public class RoleServiceImpl implements RoleService
 	private RoleRepository repository;
 
 	@Override
+	public void insert(RoleEntity role) {
+		repository.save(role);
+	}
+
+	@Override
+	public void update(RoleEntity role) {
+		repository.save(role);
+	}
+
+	@Override
+	public void delete(Integer roleId) {
+		repository.deleteById(roleId);
+	}
+
+	@Override
+	public RoleEntity findById(Integer roleId) {
+		return repository.findById(roleId).orElse(null);
+	}
+
+	@Override
 	@Transactional(readOnly = true)
 	public Collection<RoleEntity> findAll() {
 		return repository.findAll();

@@ -45,9 +45,27 @@ public class UserServiceImpl implements UserService, UserDetailsService
     }
 
     @Override
+    public void update(UserEntity user) {
+        //Cifrar password
+        String bCrypt = new BCryptPasswordEncoder().encode(user.getPassword());
+        user.setPassword(bCrypt);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void delete(Integer userId) {
+        userRepository.deleteById(userId);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public UserEntity findById(Integer userId) {
         return userRepository.findById(userId).orElse(null);
+    }
+
+    @Override
+    public Collection<UserEntity> findAll() {
+        return userRepository.findAll();
     }
 
     @Override
