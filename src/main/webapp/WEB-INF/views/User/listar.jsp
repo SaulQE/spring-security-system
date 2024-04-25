@@ -102,17 +102,27 @@
     <section class="home">
         <div class="text">
             <div class="shadow-sm p-3 mb-5 bg-body rounded">
+
+                <div class="mb-3">
+                    <a href="/saul/admin/user/registration" style="text-decoration: none; color: black;">
+                        <button type="button" class="btn btn-primary">
+                            Agregar
+                            <i class='bx bxs-user-plus icon'></i>
+                        </button>
+                    </a>
+                </div>
+
                 <table class="table table-hover">
                     <thead class="table-dark">
                     <tr>
                         <th>ID</th>
-                        <th>username</th>
-                        <th>nombre</th>
-                        <th>apellidos</th>
-                        <th>genero</th>
-                        <th>email</th>
-                        <th>celular</th>
-                        <th>state</th>
+                        <th>Username</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Genero</th>
+                        <th>Email</th>
+                        <th>Celular</th>
+                        <th>State</th>
                         <th>Acción</th>
                     </tr>
                     </thead>
@@ -129,12 +139,14 @@
                             <td>${user.state}</td>
                             <td align="center">
                                 <button type="button" class="btn btn-warning">
-                                    <a href="/saul/admin/user/editar/${user.userId}" style="text-decoration: none; color: black;">
-                                        <i class='bx bxs-edit icon' ></i>
+                                    <a href="/saul/admin/user/edit/${user.userId}"
+                                       style="text-decoration: none; color: black;">
+                                        <i class='bx bxs-edit icon'></i>
                                     </a>
                                 </button>
                                 <button type="button" class="btn btn-danger">
-                                    <a href="/saul/admin/user/borrar/${user.userId}" style="text-decoration: none; color: white;">
+                                    <a href="/saul/admin/user/delete/${user.userId}"
+                                       style="text-decoration: none; color: white;">
                                         <i class='bx bxs-trash icon'></i>
                                     </a>
                                 </button>
