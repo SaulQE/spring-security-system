@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService, UserDetailsService
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public void delete(Integer userId) {
         userRepository.deleteById(userId);
     }
