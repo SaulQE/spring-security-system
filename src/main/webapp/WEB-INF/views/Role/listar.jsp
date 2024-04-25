@@ -74,7 +74,7 @@
                     </security:authorize>
 
                     <security:authorize access="hasRole('USER')">
-                        <li class="nav-link">
+                        <li class="">
                             <a href="/saul/user">
                                 <i class='bx bxl-spring-boot icon'></i>
                                 <span class="text nav-text">Proximo</span>
@@ -104,16 +104,16 @@
             <div class="shadow-sm p-3 mb-5 bg-body rounded">
                 <table class="table table-hover">
                     <thead class="table-dark">
-                    <tr>
-                        <th style="text-align: center">ID</th>
-                        <th style="text-align: center">Tipo</th>
+                    <tr style="text-align: center">
+                        <th>ID</th>
+                        <th>Tipo</th>
                     </tr>
                     </thead>
 
                     <c:forEach var="role" items="${rolesDb}">
-                        <tr>
-                            <td style="text-align: center">${role.roleId}</td>
-                            <td style="text-align: center">${role.tipo}</td>
+                        <tr style="text-align: center">
+                            <td>${role.roleId}</td>
+                            <td>${role.tipo}</td>
                         </tr>
                     </c:forEach>
                 </table>

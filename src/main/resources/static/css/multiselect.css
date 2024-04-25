@@ -1,0 +1,92 @@
+
+
+/* Multiselect */
+.col-md-6,
+.col-lg-4 {
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+@media (min-width: 768px) {
+    .col-md-6 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+@media (min-width: 992px) {
+    .col-lg-4 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 33.33333%;
+        flex: 0 0 33.33333%;
+        max-width: 33.33333%;
+    }
+}
+
+.ui.selection.dropdown {
+    position: relative;
+}
+
+.ui.selection.dropdown > .dropdown.icon {
+    top: 15px;
+}
+
+.ui.multiple.dropdown > .label {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.ui.label {
+    background: #e8647c;
+}
+.ui.label a {
+    opacity: 1;
+    color: #fff;
+    padding: 8px 10px !important;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+    border: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+    .ui.label a {
+        -webkit-transition: none;
+        -o-transition: none;
+        transition: none;
+    }
+}
+.ui.label a:hover,
+.ui.label a:focus,
+.ui.label a.active {
+    background: #e8647c;
+    color: #fff;
+}
+.ui.label > .delete.icon {
+    opacity: 1;
+}
+
+.ui.selection.dropdown .menu > .item {
+    border-top: 1px solid #e6e6e6;
+}
+
+.ui.dropdown .menu > .item {
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+@media (prefers-reduced-motion: reduce) {
+    .ui.dropdown .menu > .item {
+        -webkit-transition: none;
+        -o-transition: none;
+        transition: none;
+    }
+}
+.ui.dropdown .menu > .item:hover {
+    background: #e8647c;
+    color: #fff;
+}
+

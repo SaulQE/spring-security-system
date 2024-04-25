@@ -18,7 +18,7 @@ public class RolController
     @GetMapping("/dba/roles")
     public String listar_GET(Map map)
     {
-        map.put("rolesDb", roleService.findAll());
+        map.put("rolesDb", roleService.findAllOrderBy());
         return "Role/listar";
     }
 

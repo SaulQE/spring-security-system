@@ -50,6 +50,23 @@ public class UserController
         return "redirect:/admin/users";
     }
 
+    @GetMapping("/user/edit/{userId}")
+    public String edit_GET(Model model, @PathVariable Integer userId)
+    {
+        UserEntity userDb = userService.findById(userId);
+        model.addAttribute("user", userDb);
+        model.addAttribute("itemsRole",roleService.findAll());
+
+        return "User/edit";
+    }
+
+    @PostMapping("/user/edit/{userId}")
+    public String edit_POST(UserEntity user)
+    {
+        userService.update(user);
+        return "redirect:/admin/users";
+    }
+
     @GetMapping("/user/delete/{userId}")
     public String delete_GET(Model model, @PathVariable Integer userId)
     {

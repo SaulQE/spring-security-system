@@ -76,7 +76,7 @@ public class HomeController
         if (!captchaService.isResponseValid(ip, recaptchaResponse)) {
             return "redirect:/register";
         }
-        userService.insert(newUser);
+        userService.insertUserDefault(newUser);
         return "redirect:/login";
     }
 

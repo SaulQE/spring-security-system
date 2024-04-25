@@ -11,5 +11,6 @@ public interface RoleService
 	public abstract void delete(Integer roleId);
 	public abstract RoleEntity findById(Integer roleId);
 	public abstract Collection<RoleEntity> findAll();
+	public abstract Collection<RoleEntity> findAllOrderBy();
 	
 }

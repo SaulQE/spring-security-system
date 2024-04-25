@@ -14,7 +14,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>AGREGAR</title>
+    <title>EDITAR</title>
 
     <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css'>
     <link rel='stylesheet'
@@ -107,10 +107,10 @@
     <section class="home">
         <div class="text">
             <div class="shadow-sm p-3 mb-5 bg-body rounded">
-                <h3 style="margin-top: 20px" align="center">User - Agregar</h3>
+                <h3 style="margin-top: 20px" align="center">User - Editar</h3>
 
                 <!-- Formulario Spring -->
-                <form:form action="" method="post" modelAttribute="userEntity">
+                <form:form action="" method="post" modelAttribute="user">
                     <div class="shadow-lg p-4 mb-4 bg-white border border-2"
                          style="width: 720px; margin: 20px auto; border-radius: 10px">
 
@@ -155,7 +155,6 @@
                                         </form:select>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                         <br>

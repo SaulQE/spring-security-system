@@ -55,7 +55,7 @@
                     </li>
 
                     <security:authorize access="hasRole('ADMIN')">
-                        <li class="nav-link">
+                        <li class="">
                             <a href="/saul/admin/users">
                                 <i class='bx bxs-user icon'></i>
                                 <span class="text nav-text">Users</span>
@@ -64,7 +64,7 @@
                     </security:authorize>
 
                     <security:authorize access="hasRole('DBA')">
-                        <li class="nav-link">
+                        <li class="">
                             <a href="/saul/dba/roles">
                                 <i class='bx bxs-key icon'></i>
                                 <span class="text nav-text">Roles</span>
@@ -73,7 +73,7 @@
                     </security:authorize>
 
                     <security:authorize access="hasRole('USER')">
-                        <li class="nav-link">
+                        <li class="">
                             <a href="/saul/user">
                                 <i class='bx bxl-spring-boot icon'></i>
                                 <span class="text nav-text">Proximo</span>

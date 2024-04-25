@@ -77,7 +77,7 @@
                     </security:authorize>
 
                     <security:authorize access="hasRole('USER')">
-                        <li class="nav-link">
+                        <li class="">
                             <a href="/saul/user">
                                 <i class='bx bxl-spring-boot icon'></i>
                                 <span class="text nav-text">Proximo</span>

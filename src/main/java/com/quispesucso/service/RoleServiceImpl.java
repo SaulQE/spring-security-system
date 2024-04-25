@@ -15,21 +15,25 @@ public class RoleServiceImpl implements RoleService
 	private RoleRepository repository;
 
 	@Override
+	@Transactional
 	public void insert(RoleEntity role) {
 		repository.save(role);
 	}
 
 	@Override
+	@Transactional
 	public void update(RoleEntity role) {
 		repository.save(role);
 	}
 
 	@Override
+	@Transactional
 	public void delete(Integer roleId) {
 		repository.deleteById(roleId);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public RoleEntity findById(Integer roleId) {
 		return repository.findById(roleId).orElse(null);
 	}
@@ -38,6 +42,12 @@ public class RoleServiceImpl implements RoleService
 	@Transactional(readOnly = true)
 	public Collection<RoleEntity> findAll() {
 		return repository.findAll();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Collection<RoleEntity> findAllOrderBy() {
+		return repository.findAllOrderBy();
 	}
 
 }
