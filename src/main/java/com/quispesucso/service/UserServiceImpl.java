@@ -37,6 +37,17 @@ public class UserServiceImpl implements UserService, UserDetailsService
         String bCrypt = new BCryptPasswordEncoder().encode(user.getPassword());
         user.setPassword(bCrypt);
 
+        userRepository.save(user);
+    }
+
+    @Override
+    @Transactional
+    public void insertUserDefault(UserEntity user)
+    {
+        //Cifrar password
+        String bCrypt = new BCryptPasswordEncoder().encode(user.getPassword());
+        user.setPassword(bCrypt);
+
         //Asignar rol por defecto
         RoleEntity defaultRole = roleRepository.findByTipo(RoleType.USER.name());
         user.getItemsRole().add(defaultRole);
@@ -45,9 +56,30 @@ public class UserServiceImpl implements UserService, UserDetailsService
     }
 
     @Override
+    @Transactional
+    public void update(UserEntity user) {
+        //Cifrar password
+        String bCrypt = new BCryptPasswordEncoder().encode(user.getPassword());
+        user.setPassword(bCrypt);
+        userRepository.save(user);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public void delete(Integer userId) {
+        userRepository.deleteById(userId);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public UserEntity findById(Integer userId) {
         return userRepository.findById(userId).orElse(null);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Collection<UserEntity> findAll() {
+        return userRepository.findAll();
     }
 
     @Override

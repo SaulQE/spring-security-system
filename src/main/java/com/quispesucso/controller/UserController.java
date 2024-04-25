@@ -5,48 +5,36 @@ import com.quispesucso.service.CaptchaService;
 import com.quispesucso.service.RoleService;
 import com.quispesucso.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 @Controller
+@RequestMapping("/admin")
 public class UserController
 {
-    @Autowired
-    private RoleService roleService;
-
     @Autowired
     private UserService userService;
 
     @Autowired
-    private CaptchaService captchaService;
+    private RoleService roleService;
 
     public UserController(){
     }
 
-    @GetMapping("/user")
-    public String user_GET() {
-        return "User/user";
+    @GetMapping("/users")
+    public String listar_GET(Map map)
+    {
+        map.put("usersDb", userService.findAll());
+        return "User/listar";
     }
 
-    @GetMapping("/admin")
-    public String admin_GET() {
-        return "User/admin";
-    }
-
-    @GetMapping("/dba")
-    public String dba_GET() {
-        return "User/dba";
-    }
-
-    @GetMapping("/admin/registration")
+    @GetMapping("/user/registration")
     public String registration_GET(Model model, Map map)
     {
         model.addAttribute("userEntity", new UserEntity());
@@ -55,52 +43,44 @@ public class UserController
         return "User/registration";
     }
 
-    @PostMapping("/admin/registration")
+    @PostMapping("/user/registration")
     public String registration_POST(UserEntity newUser)
     {
         userService.insert(newUser);
-        return "redirect:/admin";
+        return "redirect:/admin/users";
     }
 
-    @GetMapping("/access_denied")
-    public String access_denied_GET() {
-        return "User/access_denied";
-    }
-
-    @GetMapping("/login")
-    public String login_GET() {
-        return "User/login";
-    }
-
-    @GetMapping("/register")
-    public String register_GET(Model model) {
-        model.addAttribute("newUserEntity", new UserEntity());
-        return "User/register";
-    }
-
-    @PostMapping("/register")
-    public String register_POST(UserEntity newUser,
-                                @RequestParam("g-recaptcha-response") String recaptchaResponse, HttpServletRequest request) {
-
-        // Obtiene la dirección IP del cliente
-        String ip = request.getRemoteAddr();
-        // Verifica la respuesta reCAPTCHA
-        if (!captchaService.isResponseValid(ip, recaptchaResponse)) {
-            return "redirect:/register";
-        }
-        userService.insert(newUser);
-        return "redirect:/login";
-    }
-
-
-    @RequestMapping(value="/logout",method= RequestMethod.GET)
-    public String logout(HttpServletRequest request, HttpServletResponse response)
+    @GetMapping("/user/edit/{userId}")
+    public String edit_GET(Model model, @PathVariable Integer userId)
     {
-        Authentication auth= SecurityContextHolder.getContext().getAuthentication();
+        UserEntity userDb = userService.findById(userId);
+        model.addAttribute("user", userDb);
+        model.addAttribute("itemsRole",roleService.findAll());
 
-        if(auth!=null)
-            new SecurityContextLogoutHandler().logout(request,response,auth);
-
-        return "redirect:login?logout";
+        return "User/edit";
     }
+
+    @PostMapping("/user/edit/{userId}")
+    public String edit_POST(UserEntity user)
+    {
+        userService.update(user);
+        return "redirect:/admin/users";
+    }
+
+    @GetMapping("/user/delete/{userId}")
+    public String delete_GET(Model model, @PathVariable Integer userId)
+    {
+        UserEntity userDb = userService.findById(userId);
+        model.addAttribute("user", userDb);
+
+        return "User/delete";
+    }
+
+    @PostMapping("/user/delete/{userId}")
+    public String delete_POST(UserEntity user)
+    {
+        userService.delete(user.getUserId());
+        return "redirect:/admin/users";
+    }
+
 }
