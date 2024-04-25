@@ -2,7 +2,6 @@ package com.quispesucso.controller;
 
 import com.quispesucso.entity.UserEntity;
 import com.quispesucso.service.CaptchaService;
-import com.quispesucso.service.RoleService;
 import com.quispesucso.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -14,13 +13,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Map;
 
 @Controller
 public class HomeController
 {
-    @Autowired
-    private RoleService roleService;
 
     @Autowired
     private UserService userService;
